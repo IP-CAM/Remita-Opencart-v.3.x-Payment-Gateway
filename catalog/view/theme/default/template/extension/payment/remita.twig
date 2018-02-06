@@ -1,0 +1,16 @@
+<form class="form-horizontal" method="post" action="{{ gateway_url }}">
+    <input id="merchantId" name="merchantId" value="{{ remita_mercid }}" type="hidden"/>
+    <input id="serviceTypeId" name="serviceTypeId" value="{{ remita_servicetypeid }}" type="hidden"/>
+    <input id="amt" name="amt" value="{{ totalAmount }}" type="hidden"/>
+    <input id="responseurl" name="responseurl" value="{{ returnurl }}" type="hidden"/>
+    <input id="hash" name="hash" value="{{ hash }}" type="hidden"/>
+    <input id="payerName" name="payerName" value="{{ payerName }}" type="hidden"/>
+    <input id="payerEmail" name="payerEmail" value="{{ payerEmail }}" type="hidden"/>
+    <input id="payerPhone" name="payerPhone" value="{{ payerPhone }}" type="hidden"/>
+    <input id="orderId" name="orderId" value="{{ orderid }}" type="hidden"/>
+    <div class="buttons">
+        <div class="pull-right">
+            <input type="submit" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
