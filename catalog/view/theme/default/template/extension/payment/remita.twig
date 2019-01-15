@@ -1,16 +1,61 @@
-<form class="form-horizontal" method="post" action="{{ gateway_url }}">
-    <input id="merchantId" name="merchantId" value="{{ remita_mercid }}" type="hidden"/>
-    <input id="serviceTypeId" name="serviceTypeId" value="{{ remita_servicetypeid }}" type="hidden"/>
+{% if not payment_remita_mode %}
+<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ text_testmode }}</div>
+{% endif %}
+
+<form name="webpayform" method="post" action="{{ gateway_url }}">
+    <input id="publicKey" name="publicKey" value="{{ payment_remita_publickey }}" type="hidden"/>
+    <input id="secretKey" name="secretKey" value="{{ payment_remita_secretkey }}" type="hidden"/>
     <input id="amt" name="amt" value="{{ totalAmount }}" type="hidden"/>
     <input id="responseurl" name="responseurl" value="{{ returnurl }}" type="hidden"/>
-    <input id="hash" name="hash" value="{{ hash }}" type="hidden"/>
+    <input id="txnHash" name="txnHash" value="{{ txnHash }}" type="hidden"/>
     <input id="payerName" name="payerName" value="{{ payerName }}" type="hidden"/>
+    <input id="payment_firstname" name="payment_firstname" value="{{ payment_firstname }}" type="hidden"/>
+    <input id="payment_lastname" name="payment_lastname" value="{{ payment_lastname }}" type="hidden"/>
     <input id="payerEmail" name="payerEmail" value="{{ payerEmail }}" type="hidden"/>
     <input id="payerPhone" name="payerPhone" value="{{ payerPhone }}" type="hidden"/>
-    <input id="orderId" name="orderId" value="{{ orderid }}" type="hidden"/>
+    <input id="storeorderid" name="storeorderid" value="{{ storeorderid }}" type="hidden"/>
+    <input id="totalAmount" name="totalAmount" value="{{ totalAmount }}" type="hidden"/>
+    <input id="gateway_url" name="gateway_url" value="{{ gateway_url }}" type="hidden"/>
+    <input id="returnurl" name="returnurl" value="{{ returnurl }}" type="hidden"/>
+
     <div class="buttons">
-        <div class="pull-right">
-            <input type="submit" value="{{ button_confirm }}" id="button-confirm" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+
+        <script src="{{ gateway_url }}"></script>
+        <div class="buttons">
+            <div class="pull-right">
+                <input type="button"  onclick="makePayment()" value="{{ button_confirm }}" class="btn btn-primary" />
+            </div>
         </div>
     </div>
 </form>
+
+<script>
+    function makePayment() {
+        // console.log("<?php echo $txnHash; ?>");
+        // console.log("<?php echo $transactionId; ?>");
+        // console.log("<?php echo $payerName; ?>");
+        // console.log("<?php echo $storeorderid; ?>");
+        // console.log("<?php echo $gateway_url; ?>");
+        var paymentEngine = RmPaymentEngine.init({
+            key: "{{ payment_remita_publickey }}",
+            customerId: "{{ storeorderid }}",
+            firstName: "{{ payment_firstname }}",
+            transactionId: "{{ transactionId }}",
+            lastName: "{{ payment_lastname }}",
+            narration: "bill pay",
+            email: "{{ payerEmail }}",
+            amount: "{{ totalAmount }}",
+            onSuccess: function (response) {
+                window.location.href='{{returnurl}}'.replace('&amp;', '&').replace('&amp;', '&');
+            },
+            onError: function (response) {
+                console.log('callback Error Response', response);
+            },
+            onClose: function () {
+                console.log("closed");
+            }
+        });
+
+        paymentEngine.showPaymentWidget();
+    }
+</script>
