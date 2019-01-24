@@ -17,7 +17,7 @@ With Remita OpenCart Payment Plugin, the store admin can easily add all desired 
 
 ### Plugin Features
 
-*   __Accept payment__ via Visa Cards, Mastercards, Verve Cards and ewallets (eTranzact, PocketMoney etc.)
+*   __Accept payment__ via Visa Cards, Mastercards, Verve Cards and eWallets
 
 * 	__Seamless integration__ into the OpenCart checkout page.
 * 	__Add Naira__ currency symbol. To select it, On OpenCart Admin, click on __System > Localisation > Currencies__ from the left hand menu.
