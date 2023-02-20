@@ -45,3 +45,11 @@ With Remita OpenCart Payment Plugin, the store admin can easily add all desired 
 4. Set the "Status" drop down to "Enabled" ( It is disabled on default )
 5. Save the settings
 6. A success message is displayed on the screen to show your plugin has been installed and the setup was successful.
+
+
+## Useful links
+* Join our Slack Developer/Support channel at http://bit.ly/RemitaDevSlack
+    
+## Support
+- For all other support needs, support@remita.net
+- To contribute to this repo, create an issue on what you intend to fix or update, make a PR and team will look into it and merge.
